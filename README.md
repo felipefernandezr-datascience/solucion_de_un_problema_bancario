@@ -1,1 +1,40 @@
-# solucion_de_un_problema_bancario
+# 🏦 Simulación y Optimización de Servicio - Banco de Colombia
+
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Status](https://img.shields.io/badge/Status-Completado-green)
+![Type](https://img.shields.io/badge/Simulaci%C3%B3n-Eventos%20Discretos-orange)
+
+Este repositorio contiene el código fuente y el análisis de resultados de una simulación de colas (modelo M/M/1) diseñada para optimizar la asignación de cajeros en el **Banco de Colombia**.
+
+## 📋 Descripción del Problema
+
+El Banco de Colombia no cuenta con cajeros electrónicos, por lo que toda la operación (pagos y retiros) recae sobre tres cajas físicas. La gerencia necesita determinar la configuración óptima para prestar el mejor servicio sin demoras excesivas.
+
+**La pregunta clave:**
+¿Cómo se deben distribuir las 3 cajas disponibles?
+* ¿2 exclusivas para Retiros y 1 para Pagos?
+* ¿1 exclusiva para Retiros y 2 para Pagos?
+
+## ⚙️ Metodología y Supuestos
+
+Para resolver esto, se desarrolló un simulador de **Eventos Discretos** en Python con las siguientes características:
+
+* **Modelo de Colas:** M/M/1 (Llegadas de Poisson, tiempos de servicio exponenciales, servidores independientes).
+* **Duración:** Se simularon días operativos de 8 horas (480 minutos).
+* **Robustez:** Se ejecutaron **10 réplicas** del modelo para obtener promedios estadísticos confiables.
+* **Datos de Entrada:**
+    * 70% de usuarios realizan **Retiros**.
+    * 30% de usuarios realizan **Pagos**.
+    * Tipos de usuario clasificados por velocidad: *Rápido, Normal, Lento, Muy Lento*.
+
+### Tabla de Parámetros
+| Tipo de Acción | Tipo de Usuario | Probabilidad | T. Servicio (Media) | T. Llegada (Media) |
+| :--- | :--- | :---: | :---: | :---: |
+| **Retiro** | Rápido | 0.23 | 1 min | 1 min |
+| | Normal | 0.40 | 2 min | 2 min |
+| | Lento | 0.17 | 3 min | 3 min |
+| | Muy Lento | 0.20 | 4 min | 3 min |
+| **Pago** | Rápido | 0.10 | 3 min | 1 min |
+| | Normal | 0.20 | 3 min | 2 min |
+| | Lento | 0.30 | 5 min | 3 min |
+| | Muy Lento | 0.40 | 7 min | 4 min |
