@@ -15,26 +15,40 @@ El Banco de Colombia no cuenta con cajeros electrónicos, por lo que toda la ope
 * ¿2 exclusivas para Retiros y 1 para Pagos?
 * ¿1 exclusiva para Retiros y 2 para Pagos?
 
-## ⚙️ Metodología y Supuestos
+## ⚙️ Metodología y Parámetros
 
 Para resolver esto, se desarrolló un simulador de **Eventos Discretos** en Python con las siguientes características:
 
 * **Modelo de Colas:** M/M/1 (Llegadas de Poisson, tiempos de servicio exponenciales, servidores independientes).
 * **Duración:** Se simularon días operativos de 8 horas (480 minutos).
 * **Robustez:** Se ejecutaron **10 réplicas** del modelo para obtener promedios estadísticos confiables.
-* **Datos de Entrada:**
-    * 70% de usuarios realizan **Retiros**.
-    * 30% de usuarios realizan **Pagos**.
-    * Tipos de usuario clasificados por velocidad: *Rápido, Normal, Lento, Muy Lento*.
 
-### Tabla de Parámetros
-| Tipo de Acción | Tipo de Usuario | Probabilidad | T. Servicio (Media) | T. Llegada (Media) |
-| :--- | :--- | :---: | :---: | :---: |
-| **Retiro** | Rápido | 0.23 | 1 min | 1 min |
-| | Normal | 0.40 | 2 min | 2 min |
-| | Lento | 0.17 | 3 min | 3 min |
-| | Muy Lento | 0.20 | 4 min | 3 min |
-| **Pago** | Rápido | 0.10 | 3 min | 1 min |
-| | Normal | 0.20 | 3 min | 2 min |
-| | Lento | 0.30 | 5 min | 3 min |
-| | Muy Lento | 0.40 | 7 min | 4 min |
+### Datos de Entrada y Probabilidades
+
+El comportamiento de los usuarios se modeló utilizando las siguientes tablas de parámetros y probabilidades:
+
+#### Tabla 1: Tiempos de Servicio y Llegada
+| Tipo de Acción | Tipo de Usuario | Exp. Uso Servicio (Media) | Exp. Llegada (Media) |
+| :--- | :--- | :---: | :---: |
+| **Retiro** | Rápido | 1 min | 1 min |
+| | Normal | 2 min | 2 min |
+| | Lento | 3 min | 3 min |
+| | Muy Lento | 4 min | 3 min |
+| **Consignación o Pago** | Rápido | 3 min | 1 min |
+| | Normal | 3 min | 2 min |
+| | Lento | 5 min | 3 min |
+| | Muy Lento | 7 min | 4 min |
+
+#### Tabla 2: Probabilidades por Tipo de Usuario
+Las probabilidades asignadas a cada perfil de usuario dentro de la simulación son:
+
+| Tipo de Acción | Tipo de Usuario | Probabilidad |
+| :--- | :--- | :---: |
+| **Retiro** | Rápido | 0,23 |
+| | Normal | 0,40 |
+| | Lento | 0,17 |
+| | Muy lento | 0,20 |
+| **Consignación o pago** | Rápido | 0,10 |
+| | Normal | 0,20 |
+| | Lento | 0,30 |
+| | Muy lento | 0,40 |
